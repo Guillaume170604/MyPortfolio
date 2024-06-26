@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Guillaume Faure</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Animation des sections au défilement
+            $(window).scroll(function() {
+                $('.section').each(function() {
+                    if ($(this).offset().top < $(window).scrollTop() + $(window).height() - 100) {
+                        $(this).addClass('visible');
+                    }
+                });
+
+                // Bouton retour en haut
+                if ($(window).scrollTop() > 100) {
+                    $('.back-to-top').fadeIn();
+                } else {
+                    $('.back-to-top').fadeOut();
+                }
+            });
+
+            // Smooth scroll pour les liens de navigation
+            $('nav ul li a').click(function(event) {
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, 800);
+            });
+
+            // Bouton retour en haut de page
+            $('.back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 800);
+                return false;
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -20,11 +54,11 @@
             <li><a href="#projects">Projets</a></li>
         </ul>
     </nav>
-    <section id="about">
+    <section id="about" class="section">
         <h2>À propos</h2>
         <p>Je suis actuellement en alternance en informatique orienté réalisation d’applications. Je suis quelqu’un en constante recherche de savoir.</p>
     </section>
-    <section id="skills">
+    <section id="skills" class="section">
         <h2>Compétences</h2>
         <ul>
             <li>HTML / CSS / JavaScript</li>
@@ -34,7 +68,7 @@
             <li>Python</li>
         </ul>
     </section>
-    <section id="experience">
+    <section id="experience" class="section">
         <h2>Expérience</h2>
         <h3>ProBtp Cagnes sur mer</h3>
         <p>Alternant Informatique (2022 – Présent)</p>
@@ -60,23 +94,24 @@
             <li>Découverte de la programmation sous Linux.</li>
         </ul>
     </section>
-    <section id="education">
+    <section id="education" class="section">
         <h2>Éducation</h2>
         <p>Baccalauréat Générale (2021)</p>
         <p>BUT Informatique (2022 - 2025)</p>
     </section>
-    <section id="projects">
+    <section id="projects" class="section">
         <h2>Projets</h2>
         <ul>
-            <li><strong>Projet 1:</strong> Description du projet 1.</li>
-            <li><strong>Projet 2:</strong> Description du projet 2.</li>
-            <li><strong>Projet 3:</strong> Description du projet 3.</li>
+            <li><strong>Jeu 2D Feu&Eau:</strong> Dans le cadre de ma première année de BUT Informatique, j'ai développé en équipe (Rémi MATHIEU, Romain STEFANI) un jeu se jouant à 2 joueurs en JAVA et JAVAFX.</li>
+            <li><strong>Application AndroidStudio:</strong> Dans le cadre de ma deuxième année de BUT Informatique, j'ai développé avec Romain STEFANI une application sur le thème de Pokémon.</li>
+            <li><strong>Jeu Unreal Engine 5 (en cours)</strong> Dans le cadre d'un projet personnel, nous nous sommes lancés avec Romain STEFANI dans la programmation d'un jeu 3D avec le moteur UnrealEngine5, et l'utilisation de C++.</li>
         </ul>
-        <p>Pour plus de projets, visitez mon <a href="https://github.com/votre-profil-github" target="_blank">GitHub</a>.</p>
+        <p>Pour plus de projets, visitez mon <a href="https://github.com/Guillaume170604" target="_blank">GitHub</a>.</p>
     </section>
     <footer>
         <p>Contact: faureliffran.guillaume@gmail.com | 06 82 01 48 69</p>
         <p>Adresse: 60 chemin du val fleuri, Cagnes sur mer, 06800</p>
     </footer>
+    <div class="back-to-top">↑ Retour en haut</div>
 </body>
 </html>
