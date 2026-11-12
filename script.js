@@ -106,9 +106,10 @@
 
     const FILES = {
         "a_propos.txt":
-            "Guillaume Faure — Master 1 Informatique, Université Côte d'Azur.\n" +
+            "Guillaume Faure — Master 2 Informatique, spécialité cybersécurité.\n" +
+            "Université Côte d'Azur, avec Polytech Nice.\n" +
             "Alternant chez PRO BTP (gestion des identités et habilitations).\n" +
-            "En constante recherche de savoir.",
+            "En recherche d'un poste en cybersécurité.",
         "competences.txt":
             "offensif   : Metasploit, Burp Suite, Nmap, Hydra, John the Ripper\n" +
             "défensif   : Wireshark, SOC niveau 1\n" +
