@@ -3,83 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Guillaume Faure</title>
+    <title>Guillaume Faure — Rapport de test d'intrusion</title>
+    <meta name="description" content="Portfolio de Guillaume Faure, étudiant en Master Informatique et alternant en gestion des identités, en recherche d'une alternance en cybersécurité.">
+    <meta name="theme-color" content="#ece7db">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2315140f'/%3E%3Ctext x='32' y='43' font-family='monospace' font-weight='700' font-size='30' text-anchor='middle' fill='%23ff4d3d'%3EGF%3C/text%3E%3C/svg%3E">
+    <script>
+        // Applique le thème avant le premier rendu (évite le flash).
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.dataset.theme = t;
+            document.documentElement.classList.add('js');
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Guillaume Faure</h1>
-        <p>Développeur Informatique</p>
+    <!--
+        Bien vu.
+        Les curieux lisent toujours le code source : c'est exactement le bon réflexe.
+        Indice : le terminal en bas de page cache un fichier. Essaie « ls -a ».
+    -->
+    <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+    <header class="topbar">
+        <a class="topbar-ref" href="#top">RÉF. PT-GF-001</a>
+        <span class="topbar-class"><i class="dot"></i>Classification&nbsp;: déclassifié</span>
+        <span class="topbar-date" id="issue-date"></span>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème">
+            <span class="theme-toggle-label"></span>
+        </button>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#skills">Compétences</a></li>
-            <li><a href="#experience">Expérience</a></li>
-            <li><a href="#education">Éducation</a></li>
-            <li><a href="#projects">Projets</a></li>
-        </ul>
+
+    <nav class="rail" aria-label="Phases du rapport">
+        <ol>
+            <li><a href="#recon"><b>01</b><span>Reconnaissance</span></a></li>
+            <li><a href="#enum"><b>02</b><span>Énumération</span></a></li>
+            <li><a href="#exploit"><b>03</b><span>Exploitation</span></a></li>
+            <li><a href="#privesc"><b>04</b><span>Élévation</span></a></li>
+            <li><a href="#loot"><b>05</b><span>Post-exploitation</span></a></li>
+            <li><a href="#exfil"><b>06</b><span>Exfiltration</span></a></li>
+        </ol>
     </nav>
-    <section id="about" class="section">
-        <h2>À propos</h2>
-        <p>Je suis actuellement en alternance en informatique orienté réalisation d’applications. Je suis quelqu’un en constante recherche de savoir.</p>
-        <a href="CV_FAURE_Guillaume.pdf" class="download-btn" download>Télécharger mon CV</a>
-    </section>
-    <section id="skills" class="section">
-        <h2>Compétences</h2>
-        <ul>
-            <li>HTML / CSS / JavaScript</li>
-            <li>Java</li>
-            <li>C / C++</li>
-            <li>AutoIT</li>
-            <li>Python</li>
-        </ul>
-    </section>
-    <section id="experience" class="section">
-        <h2>Expérience</h2>
-        <h3>ProBtp Cagnes sur mer</h3>
-        <p>Alternant Informatique (2022 – Présent)</p>
-        <ul>
-            <li>Automatisation des tâches de l’équipe de gestion des identités/habilitations en utilisant AutoIT.</li>
-        </ul>
-        <h3>McDonald's Antibes</h3>
-        <p>Équipier Polyvalent (2022 - 5 mois)</p>
-        <ul>
-            <li>Travail en cuisine et service à table.</li>
-        </ul>
-        <h3>DIAGO SUD Cagnes sur mer</h3>
-        <p>Stage en entreprise (2018 - 1 semaine)</p>
-        <ul>
-            <li>Présentation auprès des membres et des associés.</li>
-            <li>Observation lors de diagnostics immobiliers chez les particuliers.</li>
-        </ul>
-        <h3>TDK Mougins</h3>
-        <p>Stage d’observation en entreprise (2016 - 2 jours)</p>
-        <ul>
-            <li>Présentation auprès des membres de l’entreprise.</li>
-            <li>Participation en tant qu’observateur aux réunions.</li>
-            <li>Découverte de la programmation sous Linux.</li>
-        </ul>
-    </section>
-    <section id="education" class="section">
-        <h2>Éducation</h2>
-        <p>Baccalauréat Générale (2021)</p>
-        <p>BUT Informatique (2022 - 2025)</p>
-    </section>
-    <section id="projects" class="section">
-        <h2>Projets</h2>
-        <ul>
-            <li><strong>Jeu 2D Feu&Eau:</strong> Dans le cadre de ma première année de BUT Informatique, j'ai développé en équipe (<a href="https://remim06.github.io/portfolio.html" target="_blank" class="link">Rémi MATHIEU</a>, <a href="https://RomainStefani04.github.io/portfolio" target="_blank" class="link">Romain STEFANI</a>) un jeu se jouant à 2 joueurs en JAVA et JAVAFX.</li>
-            <li><strong>Application AndroidStudio:</strong> Dans le cadre de ma deuxième année de BUT Informatique, j'ai développé avec <a href="https://RomainStefani04.github.io/portfolio" target="_blank" class="link">Romain STEFANI</a> une application sur le thème de Pokémon.</li>
-            <li><strong>Jeu Unreal Engine 5 (en cours)</strong> Dans le cadre d'un projet personnel, nous nous sommes lancés avec <a href="https://RomainStefani04.github.io/portfolio" target="_blank" class="link">Romain STEFANI</a> dans la programmation d'un jeu 3D avec le moteur UnrealEngine5, et l'utilisation de C++.</li>
-        </ul>
-        <p>Pour plus de projets, visitez mon <a href="https://github.com/Guillaume170604" target="_blank" class="link">GitHub</a>.</p>
-    </section>
-    <footer>
-        <p>Contact: faureliffran.guillaume@gmail.com | 06 82 01 48 69</p>
-        <p>Adresse: 60 chemin du val fleuri, Cagnes sur mer, 06800</p>
+
+    <main>
+        <!-- ============ COUVERTURE ============ -->
+        <section class="hero" id="top">
+            <p class="eyebrow">Rapport de test d'intrusion <span class="sep">/</span> Cible&nbsp;:</p>
+            <div class="name-wrap">
+                <h1 class="name">
+                    <span class="scramble" data-text="Guillaume">Guillaume</span>
+                    <span class="scramble name-last" data-text="Faure">Faure</span>
+                </h1>
+                <div class="stamp" aria-hidden="true">
+                    <span>Recrutable</span>
+                    <small>alternance cybersécurité</small>
+                </div>
+            </div>
+
+            <div class="hero-grid">
+                <div class="summary">
+                    <h2 class="label">Synthèse managériale</h2>
+                    <p>
+                        L'audit a porté sur un étudiant en <strong>Master Informatique</strong>, alternant
+                        depuis 2022 au sein d'une équipe de <strong>gestion des identités et des habilitations</strong>.
+                        La cible présente une exposition anormalement élevée à la
+                        <mark>cybersécurité</mark> et recherche activement une <mark>alternance</mark> dans ce domaine.
+                    </p>
+                    <p class="verdict">
+                        <span class="sev sev-crit">Critique</span>
+                        Niveau de risque global&nbsp;: élevé pour quiconque ne le recrute pas à temps.
+                    </p>
+                    <div class="cta">
+                        <a class="btn btn-solid" href="#exfil">Prendre contact</a>
+                        <a class="btn" href="Guillaume_FAURE_CV.pdf" download>Télécharger le CV <span aria-hidden="true">↓</span></a>
+                    </div>
+                </div>
+
+                <dl class="meta">
+                    <div><dt>Cible</dt><dd>FAURE, Guillaume</dd></div>
+                    <div><dt>Statut</dt><dd>Master 1 Informatique · alternant</dd></div>
+                    <div><dt>Périmètre</dt><dd>IAM · pentest · SOC</dd></div>
+                    <div><dt>Localisation</dt><dd>Cagnes-sur-Mer (06)</dd></div>
+                    <div><dt>Mobilité</dt><dd>Permis A et B · véhiculé</dd></div>
+                    <div><dt>Langues</dt><dd>Français · Anglais C1 · Espagnol</dd></div>
+                </dl>
+            </div>
+
+            <a class="scroll-hint" href="#recon">Ouvrir le dossier <span aria-hidden="true">↓</span></a>
+        </section>
+
+        <!-- ============ 01 RECONNAISSANCE ============ -->
+        <section class="phase" id="recon">
+            <header class="phase-head reveal">
+                <span class="phase-num">01</span>
+                <div>
+                    <p class="phase-tag">Phase 01 — Reconnaissance</p>
+                    <h2>Profil de la cible</h2>
+                </div>
+            </header>
+
+            <div class="recon-grid">
+                <div class="prose reveal">
+                    <p class="lead">
+                        Je suis actuellement en Master&nbsp;1 Informatique à l'Université Côte d'Azur,
+                        en alternance chez PRO&nbsp;BTP.
+                    </p>
+                    <p>
+                        Au quotidien, je travaille dans l'équipe qui gère les identités et les habilitations&nbsp;:
+                        Active Directory, Azure Entra&nbsp;ID, groupes et droits d'accès. Savoir qui a accès à quoi,
+                        et pourquoi, c'est déjà de la sécurité.
+                    </p>
+                    <p>
+                        En parallèle, je me forme en autonomie à la cybersécurité offensive et défensive
+                        sur TryHackMe et auprès de Fortinet. Je suis quelqu'un en constante recherche de savoir.
+                    </p>
+                </div>
+
+                <aside class="osint reveal">
+                    <h3 class="label">Fiche OSINT <span class="hint">— survolez les zones caviardées</span></h3>
+                    <ul>
+                        <li><span>Objectif</span><span class="redact" tabindex="0">une alternance en cybersécurité</span></li>
+                        <li><span>Mobile</span><span class="redact" tabindex="0">comprendre comment ça casse</span></li>
+                        <li><span>Mode opératoire</span><span class="redact" tabindex="0">apprendre, tester, recommencer</span></li>
+                        <li><span>Terrain de jeu</span><span class="redact" tabindex="0">TryHackMe, labs, CTF</span></li>
+                        <li><span>Point faible</span><span class="redact" tabindex="0">ne sait pas laisser une question sans réponse</span></li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ============ 02 ÉNUMÉRATION ============ -->
+        <section class="phase" id="enum">
+            <header class="phase-head reveal">
+                <span class="phase-num">02</span>
+                <div>
+                    <p class="phase-tag">Phase 02 — Énumération</p>
+                    <h2>Services exposés</h2>
+                </div>
+            </header>
+
+            <div class="scan reveal" id="scan" aria-label="Résultat de scan des compétences">
+                <div class="scan-bar"><i></i><i></i><i></i><span>scan — competences.nmap</span></div>
+<pre class="scan-body"><span class="ln"><b class="p">$</b> nmap -sV -p- guillaume.faure</span>
+<span class="ln dim">Nmap scan report for guillaume.faure</span>
+<span class="ln dim">Host is up (0.0017s latency).</span>
+<span class="ln"> </span>
+<span class="ln head">PORT      STATE  SERVICE          DÉTAIL</span>
+<span class="ln">21/tcp    <b class="o">open</b>   metasploit       exploitation</span>
+<span class="ln">53/tcp    <b class="o">open</b>   nmap             cartographie réseau</span>
+<span class="ln">80/tcp    <b class="o">open</b>   burp-suite       tests d'intrusion web</span>
+<span class="ln">88/tcp    <b class="o">open</b>   active-directory identités et habilitations</span>
+<span class="ln">443/tcp   <b class="o">open</b>   entra-id         identités cloud Azure</span>
+<span class="ln">636/tcp   <b class="o">open</b>   pki              certificats, migration</span>
+<span class="ln">1337/tcp  <b class="o">open</b>   hydra            attaques par force brute</span>
+<span class="ln">2049/tcp  <b class="o">open</b>   john-the-ripper  cassage de mots de passe</span>
+<span class="ln">5353/tcp  <b class="o">open</b>   wireshark        analyse de trafic</span>
+<span class="ln">8080/tcp  <b class="o">open</b>   dev              Python, Java, C/C++, AutoIt</span>
+<span class="ln"> </span>
+<span class="ln dim">Nmap done: 1 host up — 10 services ouverts, 0 filtré.</span></pre>
+            </div>
+
+            <div class="skills">
+                <article class="skill reveal">
+                    <h3>Offensif</h3>
+                    <p>Reconnaissance, exploitation et attaques sur l'authentification.</p>
+                    <ul class="tags"><li>Metasploit</li><li>Burp Suite</li><li>Nmap</li><li>Hydra</li><li>John the Ripper</li></ul>
+                </article>
+                <article class="skill reveal">
+                    <h3>Défensif</h3>
+                    <p>Analyse de trafic et bases du travail d'analyste SOC.</p>
+                    <ul class="tags"><li>Wireshark</li><li>SOC niveau 1</li><li>Sécurisation de comptes</li></ul>
+                </article>
+                <article class="skill reveal">
+                    <h3>Identités</h3>
+                    <p>Le cœur de mon alternance&nbsp;: qui a accès à quoi.</p>
+                    <ul class="tags"><li>Active Directory</li><li>Azure Entra ID</li><li>PKI</li><li>Groupes et accès</li></ul>
+                </article>
+                <article class="skill reveal">
+                    <h3>Développement</h3>
+                    <p>Trois ans de BUT orienté réalisation d'applications.</p>
+                    <ul class="tags"><li>Python</li><li>Java</li><li>C / C++</li><li>AutoIt</li><li>HTML / CSS / JS</li></ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ 03 EXPLOITATION ============ -->
+        <section class="phase" id="exploit">
+            <header class="phase-head reveal">
+                <span class="phase-num">03</span>
+                <div>
+                    <p class="phase-tag">Phase 03 — Exploitation</p>
+                    <h2>Expérience professionnelle</h2>
+                </div>
+            </header>
+
+            <div class="job reveal">
+                <div class="job-head">
+                    <div>
+                        <h3>Alternant développeur informatique</h3>
+                        <p>PRO BTP — Cagnes-sur-Mer · équipe gestion des identités et habilitations</p>
+                    </div>
+                    <span class="job-date">2022 → aujourd'hui</span>
+                </div>
+
+                <ol class="findings">
+                    <li class="finding">
+                        <span class="finding-id">GF-001</span>
+                        <div>
+                            <h4>Gestion des identités et des habilitations</h4>
+                            <p>Administration de l'Active Directory et d'Azure Entra&nbsp;ID, gestion des groupes et des accès.</p>
+                        </div>
+                        <span class="sev sev-crit">Critique</span>
+                    </li>
+                    <li class="finding">
+                        <span class="finding-id">GF-002</span>
+                        <div>
+                            <h4>Projet de sécurisation des comptes</h4>
+                            <p>Participation au projet de sécurisation des comptes de l'entreprise.</p>
+                        </div>
+                        <span class="sev sev-high">Élevé</span>
+                    </li>
+                    <li class="finding">
+                        <span class="finding-id">GF-003</span>
+                        <div>
+                            <h4>Industrialisation et migration de la PKI</h4>
+                            <p>Participation au projet d'industrialisation et de migration de l'infrastructure de gestion de clés.</p>
+                        </div>
+                        <span class="sev sev-high">Élevé</span>
+                    </li>
+                    <li class="finding">
+                        <span class="finding-id">GF-004</span>
+                        <div>
+                            <h4>Automatisation des tâches de l'équipe</h4>
+                            <p>Développement de scripts en AutoIt pour automatiser les tâches récurrentes de l'équipe.</p>
+                        </div>
+                        <span class="sev sev-med">Moyen</span>
+                    </li>
+                </ol>
+                <p class="footnote">Sévérité = impact estimé sur votre équipe en cas de recrutement.</p>
+            </div>
+        </section>
+
+        <!-- ============ 04 ÉLÉVATION DE PRIVILÈGES ============ -->
+        <section class="phase" id="privesc">
+            <header class="phase-head reveal">
+                <span class="phase-num">04</span>
+                <div>
+                    <p class="phase-tag">Phase 04 — Élévation de privilèges</p>
+                    <h2>Formation</h2>
+                </div>
+            </header>
+
+            <ol class="ladder">
+                <li class="rung reveal">
+                    <code class="rung-lvl">uid=1000(user)</code>
+                    <div class="rung-body">
+                        <span class="rung-date">2022 – 2025</span>
+                        <h3>BUT Informatique</h3>
+                        <p>Parcours réalisation d'applications · Université Côte d'Azur, Sophia Antipolis</p>
+                    </div>
+                </li>
+                <li class="rung reveal">
+                    <code class="rung-lvl">uid=27(sudo)</code>
+                    <div class="rung-body">
+                        <span class="rung-date">2025 – aujourd'hui</span>
+                        <h3>Master Informatique</h3>
+                        <p>En alternance · Université Côte d'Azur, Sophia Antipolis</p>
+                    </div>
+                </li>
+                <li class="rung rung-root reveal">
+                    <code class="rung-lvl">uid=0(root)</code>
+                    <div class="rung-body">
+                        <span class="rung-date">2024 – aujourd'hui · en cours</span>
+                        <h3>Formation autonome en cybersécurité</h3>
+                        <div class="certs">
+                            <div>
+                                <h4>TryHackMe</h4>
+                                <ul>
+                                    <li>Cyber Security 101</li>
+                                    <li>Jr Penetration Tester</li>
+                                    <li>SOC Level 1</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Fortinet</h4>
+                                <ul>
+                                    <li>Certification «&nbsp;Getting Started in Cybersecurity&nbsp;»</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- ============ 05 POST-EXPLOITATION ============ -->
+        <section class="phase" id="loot">
+            <header class="phase-head reveal">
+                <span class="phase-num">05</span>
+                <div>
+                    <p class="phase-tag">Phase 05 — Post-exploitation</p>
+                    <h2>Projets récupérés</h2>
+                </div>
+            </header>
+
+            <div class="loot">
+                <article class="piece reveal">
+                    <p class="piece-id">Pièce n°&nbsp;1 <span>Java · JavaFX</span></p>
+                    <h3>Jeu 2D Feu &amp; Eau</h3>
+                    <p>
+                        Jeu de plateforme coopératif à deux joueurs, développé en équipe en première année de BUT avec
+                        <a href="https://remim06.github.io/portfolio.html" target="_blank" rel="noopener">Rémi Mathieu</a> et
+                        <a href="https://RomainStefani04.github.io/portfolio" target="_blank" rel="noopener">Romain Stefani</a>.
+                    </p>
+                </article>
+                <article class="piece reveal">
+                    <p class="piece-id">Pièce n°&nbsp;2 <span>Android Studio</span></p>
+                    <h3>Application Android</h3>
+                    <p>
+                        Application mobile sur le thème de Pokémon, réalisée en deuxième année de BUT avec
+                        <a href="https://RomainStefani04.github.io/portfolio" target="_blank" rel="noopener">Romain Stefani</a>.
+                    </p>
+                </article>
+                <article class="piece reveal">
+                    <p class="piece-id">Pièce n°&nbsp;3 <span>Unreal Engine 5 · C++</span></p>
+                    <h3>Jeu 3D</h3>
+                    <p>
+                        Projet personnel mené avec
+                        <a href="https://RomainStefani04.github.io/portfolio" target="_blank" rel="noopener">Romain Stefani</a>&nbsp;:
+                        la programmation d'un jeu 3D en C++ sous Unreal Engine&nbsp;5.
+                    </p>
+                </article>
+            </div>
+            <p class="more reveal">Le reste du butin est sur <a href="https://github.com/Guillaume170604" target="_blank" rel="noopener">GitHub ↗</a></p>
+        </section>
+
+        <!-- ============ 06 EXFILTRATION ============ -->
+        <section class="phase phase-last" id="exfil">
+            <header class="phase-head reveal">
+                <span class="phase-num">06</span>
+                <div>
+                    <p class="phase-tag">Phase 06 — Exfiltration</p>
+                    <h2>Recommandation&nbsp;: recruter la cible</h2>
+                </div>
+            </header>
+
+            <div class="exfil-grid">
+                <div class="contact reveal">
+                    <p class="lead">Aucun correctif disponible. La seule remédiation connue est de me proposer une alternance en cybersécurité.</p>
+                    <a class="mail" href="mailto:faureliffran.guillaume@gmail.com">faureliffran.guillaume<wbr>@gmail.com</a>
+                    <div class="cta">
+                        <a class="btn btn-solid" href="Guillaume_FAURE_CV.pdf" download>Télécharger le CV <span aria-hidden="true">↓</span></a>
+                        <a class="btn" href="https://github.com/Guillaume170604" target="_blank" rel="noopener">GitHub ↗</a>
+                    </div>
+                </div>
+
+                <div class="term reveal" id="term">
+                    <div class="scan-bar"><i></i><i></i><i></i><span>visiteur@gf — shell obtenu</span></div>
+                    <div class="term-body" id="term-body">
+                        <div class="term-out" id="term-out" aria-live="polite"></div>
+                        <label class="term-line">
+                            <span class="p">visiteur@gf:~$</span>
+                            <input id="term-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Commande du terminal">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="foot">
+        <span>Fin du rapport · PT-GF-001</span>
+        <span>© <span id="year"></span> Guillaume Faure — aucune machine n'a été maltraitée pendant cet audit.</span>
+        <a href="#top">Retour en haut ↑</a>
     </footer>
-    <div class="back-to-top">↑</div>
+
     <script src="script.js"></script>
 </body>
 </html>
